@@ -31,9 +31,11 @@ jobs:
             exit 1
           fi
           
-          # Check if the summary says tests failed
-          if echo "$body" | grep -q '"failed": [1-9]'; then
-            echo "❌ Vulnerabilities found! Blocking Pull Request."
+          # Use 'jq' to extract the exact number of failed tests securely
+          failed_count=$(echo "$body" | jq '.summary.failed')
+          
+          if [ "$failed_count" -gt 0 ]; then
+            echo "❌ $failed_count Vulnerabilities found! Blocking Pull Request."
             exit 1
           else
             echo "✅ All tests passed! APIs are secure."
