@@ -15,7 +15,7 @@ jobs:
           echo "Sending API Config to Scale Secure..."
           
           # Replace the URL below with your Ngrok URL or production Scale Secure URL
-          response=$(curl -s -w "\n%{http_code}" -X POST https://a1b2c3d4.ngrok.app/v1/ai-testing/run \
+          response=$(curl -s -w "\n%{http_code}" -X POST https://nonconditional-unhaunted-blanch.ngrok-free.dev/v1/ai-testing/run \
                -H "Content-Type: application/json" \
                -d @scalesecure-tests.json)
           
