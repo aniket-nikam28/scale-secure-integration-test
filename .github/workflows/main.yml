@@ -1,0 +1,41 @@
+name: Scale Secure CI/CD
+
+on:
+  pull_request: # This makes it run every time a PR is opened
+
+jobs:
+  api-security-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Scale Secure API Tests
+        run: |
+          echo "Sending API Config to Scale Secure..."
+          
+          # Replace the URL below with your Ngrok URL or production Scale Secure URL
+          response=$(curl -s -w "\n%{http_code}" -X POST https://a1b2c3d4.ngrok.app/v1/ai-testing/run \
+               -H "Content-Type: application/json" \
+               -d @scalesecure-tests.json)
+          
+          # Extract HTTP status code and body
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          
+          echo "Response: $body"
+          
+          # If the API returns a 500 or 400 error, fail the pipeline
+          if [ "$http_code" -ne 200 ]; then
+            echo "❌ Tests failed or misconfigured! Blocking Pull Request."
+            exit 1
+          fi
+          
+          # Check if the summary says tests failed
+          if echo "$body" | grep -q '"failed": [1-9]'; then
+            echo "❌ Vulnerabilities found! Blocking Pull Request."
+            exit 1
+          else
+            echo "✅ All tests passed! APIs are secure."
+            exit 0
+          fi
