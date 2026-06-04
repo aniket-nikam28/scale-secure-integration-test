@@ -1,7 +1,7 @@
 name: Scale Secure CI/CD
 
 on:
-  pull_request: # This makes it run every time a PR is opened
+  pull_request:
 
 jobs:
   api-security-test:
@@ -15,7 +15,7 @@ jobs:
           echo "Sending API Config to Scale Secure..."
           
           # Replace the URL below with your Ngrok URL or production Scale Secure URL
-          response=$(curl -s -w "\n%{http_code}" -X POST https://a1b2c3d4.ngrok.app/v1/ai-testing/run \
+          response=$(curl -s -w "\n%{http_code}" -X POST https://nonconditional-unhaunted-blanch.ngrok-free.dev/v1/ai-testing/run \
                -H "Content-Type: application/json" \
                -d @scalesecure-tests.json)
           
@@ -31,9 +31,11 @@ jobs:
             exit 1
           fi
           
-          # Check if the summary says tests failed
-          if echo "$body" | grep -q '"failed": [1-9]'; then
-            echo "❌ Vulnerabilities found! Blocking Pull Request."
+          # Use jq to securely parse the JSON and extract the number of failed tests
+          failed_count=$(echo "$body" | jq '.summary.failed')
+          
+          if [ "$failed_count" -gt 0 ]; then
+            echo "❌ $failed_count Vulnerabilities found! Blocking Pull Request."
             exit 1
           else
             echo "✅ All tests passed! APIs are secure."
