@@ -4,7 +4,7 @@
       "protocol": "REST",
       "api_endpoint": "https://httpbin.org/post",
       "http_method": "POST",
-      "number_of_test_cases": 3,
+      "number_of_test_cases": 4,
       "description": "Test basic REST POST payload reflection",
       "headers": {
         "Authorization": "Bearer sample-token"
