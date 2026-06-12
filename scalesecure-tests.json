@@ -45,7 +45,7 @@
       "protocol": "WEBHOOK",
       "api_endpoint": "https://webhook.site/your-unique-uuid",
       "http_method": "POST",
-      "number_of_test_cases": 2,
+      "number_of_test_cases": 3,
       "sample_payload": {
         "event": "payment_failed",
         "amount": 500
