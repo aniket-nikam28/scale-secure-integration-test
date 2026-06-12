@@ -2,6 +2,6 @@
   "api_endpoint": "https://jsonplaceholder.typicode.com/posts",
   "http_method": "POST",
   "run_ai_tests": true,
-  "execute": false,
+  "execute": true,
   "sample_payload": { "title": "foo", "body": "bar", "userId": 1 }
 }
