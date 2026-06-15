@@ -2,54 +2,72 @@
   "tests": [
     {
       "protocol": "REST",
-      "api_endpoint": "https://httpbin.org/post",
+      "api_endpoint": "https://jsonplaceholder.typicode.com/posts",
       "http_method": "POST",
-      "number_of_test_cases": 3,
-      "description": "Test basic REST POST payload reflection",
-      "headers": {
-        "Authorization": "Bearer sample-token"
-      },
-      "sample_payload": {
-        "user_id": 123,
-        "action": "login"
-      }
+      "number_of_test_cases": 2,
+      "sample_payload": { "title": "foo", "body": "bar", "userId": 1 }
+    },
+    {
+      "protocol": "REST",
+      "api_endpoint": "https://dummyjson.com/products/add",
+      "http_method": "POST",
+      "number_of_test_cases": 2,
+      "sample_payload": { "title": "Scale Secure Laptop" }
+    },
+    {
+      "protocol": "REST",
+      "api_endpoint": "https://api.restful-api.dev/objects",
+      "http_method": "POST",
+      "number_of_test_cases": 2,
+      "sample_payload": { "name": "Apple MacBook Pro 16", "data": { "year": 2026, "price": 1849.99 } }
+    },
+    {
+      "protocol": "REST",
+      "api_endpoint": "https://reqres.in/api/users",
+      "http_method": "POST",
+      "number_of_test_cases": 2,
+      "sample_payload": { "name": "morpheus", "job": "leader" }
     },
     {
       "protocol": "GRAPHQL",
       "api_endpoint": "https://countries.trevorblades.com/graphql",
       "http_method": "POST",
       "number_of_test_cases": 2,
-      "sample_payload": {
-        "query": "query { country(code: \"BR\") { name native capital emoji currency languages { code name } } }"
-      }
+      "sample_payload": { "query": "query { country(code: \"BR\") { name capital } }" }
+    },
+    {
+      "protocol": "GRAPHQL",
+      "api_endpoint": "https://rickandmortyapi.com/graphql",
+      "http_method": "POST",
+      "number_of_test_cases": 2,
+      "sample_payload": { "query": "query { character(id: 1) { name status species } }" }
     },
     {
       "protocol": "WEBSOCKET",
-      "api_endpoint": "wss://echo.websocket.org",
+      "api_endpoint": "wss://stream.binance.com:9443/ws/btcusdt@trade",
       "number_of_test_cases": 2,
-      "sample_payload": {
-        "message": "Hello WebSocket!"
-      }
+      "sample_payload": { "method": "SUBSCRIBE", "params": ["btcusdt@trade"], "id": 1 }
+    },
+    {
+      "protocol": "WEBSOCKET",
+      "api_endpoint": "wss://echo.websocket.events",
+      "number_of_test_cases": 2,
+      "sample_payload": { "action": "echo", "message": "Scale Secure Connection Test" }
+    },
+    {
+      "protocol": "WEBHOOK",
+      "api_endpoint": "https://webhook.site/YOUR-UNIQUE-UUID",
+      "http_method": "POST",
+      "number_of_test_cases": 2,
+      "sample_payload": { "event": "payment_processed", "amount": 99.99 }
     },
     {
       "protocol": "GRPC",
       "api_endpoint": "grpc://grpcb.in:9000",
       "grpc_service": "hello.GreetingService",
       "grpc_method": "SayHello",
-      "number_of_test_cases": 1,
-      "sample_payload": {
-        "greeting": "Scale Secure AI"
-      }
-    },
-    {
-      "protocol": "WEBHOOK",
-      "api_endpoint": "https://webhook.site/your-unique-uuid",
-      "http_method": "POST",
-      "number_of_test_cases": 3,
-      "sample_payload": {
-        "event": "payment_failed",
-        "amount": 500
-      }
+      "number_of_test_cases": 2,
+      "sample_payload": { "greeting": "Hello from CI/CD" }
     }
   ]
 }
