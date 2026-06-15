@@ -1,55 +1,9 @@
 {
   "tests": [
     {
-      "protocol": "REST",
-      "api_endpoint": "https://httpbin.org/post",
-      "http_method": "POST",
-      "number_of_test_cases": 3,
-      "description": "Test basic REST POST payload reflection",
-      "headers": {
-        "Authorization": "Bearer sample-token"
-      },
-      "sample_payload": {
-        "user_id": 123,
-        "action": "login"
-      }
-    },
-    {
       "protocol": "GRAPHQL",
-      "api_endpoint": "https://countries.trevorblades.com/graphql",
-      "http_method": "POST",
-      "number_of_test_cases": 2,
-      "sample_payload": {
-        "query": "query { country(code: \"BR\") { name native capital emoji currency languages { code name } } }"
-      }
-    },
-    {
-      "protocol": "WEBSOCKET",
-      "api_endpoint": "wss://echo.websocket.org",
-      "number_of_test_cases": 2,
-      "sample_payload": {
-        "message": "Hello WebSocket!"
-      }
-    },
-    {
-      "protocol": "GRPC",
-      "api_endpoint": "grpc://grpcb.in:9000",
-      "grpc_service": "hello.GreetingService",
-      "grpc_method": "SayHello",
-      "number_of_test_cases": 1,
-      "sample_payload": {
-        "greeting": "Scale Secure AI"
-      }
-    },
-    {
-      "protocol": "WEBHOOK",
-      "api_endpoint": "https://webhook.site/your-unique-uuid",
-      "http_method": "POST",
-      "number_of_test_cases": 3,
-      "sample_payload": {
-        "event": "payment_failed",
-        "amount": 500
-      }
+      "api_endpoint": "https://staging-api.your-app.com/graphql",
+      "sample_payload": { "query": "query { user { id } }" }
     }
   ]
 }
